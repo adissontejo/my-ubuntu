@@ -6,4 +6,8 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  body {
+    font-family: 'Ubuntu', sans-serif;
+  }
 `;

@@ -1,11 +1,11 @@
-import { BashLine } from '~/components';
+import { Bash } from '~/components';
 
 import { Container } from './styles';
 
 const Home = () => {
   return (
     <Container>
-      <BashLine></BashLine>
+      <Bash />
     </Container>
   );
 };

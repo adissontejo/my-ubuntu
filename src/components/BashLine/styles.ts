@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-  font-family: Fira Code;
+  font-family: 'Fira Code', sans-serif;
 `;
 
 export const Title = styled.p`
@@ -23,7 +23,7 @@ export type InputProps = {
 };
 
 export const Input = styled.p<InputProps>`
-  white-space: pre-wrap;
+  white-space: pre;
 
   > .arrow {
     color: ${({ theme }) => theme.colors.bash.command};

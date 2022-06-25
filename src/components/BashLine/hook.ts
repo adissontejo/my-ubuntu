@@ -6,10 +6,15 @@ export type Entry = {
   value: string;
   cursor: number;
   response?: string;
+  active: boolean;
 };
 
-export const useEntry = () => {
-  const [entry, setEntry] = useState<Entry>({ value: ' ', cursor: 0 });
+export const useEntry = (onSubmit?: () => void) => {
+  const [entry, setEntry] = useState<Entry>({
+    value: ' ',
+    cursor: 0,
+    active: true,
+  });
 
   const { value } = entry;
 
@@ -19,7 +24,7 @@ export const useEntry = () => {
   const args = value.substring(command.length);
 
   const handleKeyDown = ({ key }: KeyboardEvent) => {
-    if (entry.response) {
+    if (!entry.active) {
       document.removeEventListener('keydown', handleKeyDown);
 
       return;
@@ -27,6 +32,7 @@ export const useEntry = () => {
 
     if (key.match(/^[A-Za-z0-9]$/g) || key === ' ') {
       setEntry(prev => ({
+        ...prev,
         value:
           prev.value.substring(0, prev.cursor) +
           key +
@@ -61,6 +67,7 @@ export const useEntry = () => {
       setEntry(prev =>
         prev.cursor !== 0
           ? {
+              ...prev,
               value:
                 prev.value.substring(0, prev.cursor - 1) +
                 prev.value.substring(prev.cursor),
@@ -75,7 +82,11 @@ export const useEntry = () => {
         ? commands[command](args.trim().split(' '))
         : `'${command}' command not found`;
 
-      setEntry(prev => ({ ...prev, response }));
+      if (onSubmit) {
+        onSubmit();
+      }
+
+      setEntry(prev => ({ ...prev, response, active: false }));
     }
   };
 
