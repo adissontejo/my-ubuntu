@@ -1,15 +1,22 @@
 import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 
 import { Container, Input, Response, Title } from './styles';
-import { useEntry } from './hook';
+import { useEntry, useEntryParams } from './hook';
 
 export type BashLineProps = HTMLAttributes<HTMLDivElement> & {
-  onSubmit?: () => void;
+  commands?: useEntryParams['commands'];
+  onSubmit?: useEntryParams['onSubmit'];
 };
 
-export const BashLine: FC<BashLineProps> = ({ onSubmit, ...rest }) => {
-  const { value, cursor, response, command, match, active } =
-    useEntry(onSubmit);
+export const BashLine: FC<BashLineProps> = ({
+  commands = {},
+  onSubmit,
+  ...rest
+}) => {
+  const { value, cursor, response, command, match, active } = useEntry({
+    onSubmit,
+    commands,
+  });
 
   const [cursorActive, setCursorActive] = useState(true);
 

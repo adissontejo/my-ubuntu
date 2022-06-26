@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { commands } from '~/utils';
-
 export type Entry = {
   value: string;
   cursor: number;
@@ -9,7 +7,15 @@ export type Entry = {
   active: boolean;
 };
 
-export const useEntry = (onSubmit?: () => void) => {
+export type useEntryParams = {
+  commands?: Record<
+    string,
+    (args?: string[]) => string | null | Promise<string | null>
+  >;
+  onSubmit?: () => void;
+};
+
+export const useEntry = ({ onSubmit, commands }: useEntryParams) => {
   const [entry, setEntry] = useState<Entry>({
     value: ' ',
     cursor: 0,
@@ -23,7 +29,7 @@ export const useEntry = (onSubmit?: () => void) => {
   const match = Object.keys(commands).some(item => item === command);
   const args = value.substring(command.length);
 
-  const handleKeyDown = ({ key }: KeyboardEvent) => {
+  const handleKeyDown = async ({ key }: KeyboardEvent) => {
     if (!entry.active) {
       document.removeEventListener('keydown', handleKeyDown);
 
@@ -79,7 +85,7 @@ export const useEntry = (onSubmit?: () => void) => {
 
     if (key === 'Enter') {
       const response = match
-        ? commands[command](args.trim().split(' '))
+        ? await commands[command](args.trim().split(' '))
         : `'${command}' command not found`;
 
       if (onSubmit) {

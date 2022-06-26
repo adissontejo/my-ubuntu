@@ -1,12 +1,15 @@
 import { ThemeProvider } from 'styled-components';
 
+import { ContextProvider } from '~/contexts';
 import { GlobalStyles, theme } from '~/styles';
 
 const MyApp = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Component {...pageProps} />
+      <ContextProvider>
+        <GlobalStyles />
+        <Component {...pageProps} />
+      </ContextProvider>
     </ThemeProvider>
   );
 };

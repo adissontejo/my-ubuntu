@@ -24,6 +24,11 @@ export const Container = styled.section`
 
     display: flex;
     justify-content: center;
+
+    .icon {
+      position: absolute;
+      right: 30px;
+    }
   }
 
   > .content {
