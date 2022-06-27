@@ -8,6 +8,11 @@ export const Container = styled(Window)`
 
     background: ${({ theme }) => theme.colors.bash.background};
 
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track-piece {
+      background: #0000;
+    }
   }
 `;

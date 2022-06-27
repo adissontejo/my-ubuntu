@@ -39,8 +39,9 @@ export const useCommands = () => {
       return null;
     },
     clear: () => {
-      setLines([count]);
-      setCount(0);
+      console.log(count);
+
+      setLines([]);
 
       return null;
     },
