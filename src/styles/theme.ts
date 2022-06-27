@@ -1,9 +1,8 @@
 export const theme = {
   colors: {
+    gray: '#2c2c2c',
     bash: {
       background: '#282a36',
-      header: '#2c2c2c',
-      border: '#262626',
       title: '#5f45a4',
       username: '#e1f34a',
       dirname: '#75d7ec',

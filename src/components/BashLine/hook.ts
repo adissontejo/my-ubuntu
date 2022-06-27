@@ -8,10 +8,7 @@ export type Entry = {
 };
 
 export type useEntryParams = {
-  commands?: Record<
-    string,
-    (args?: string[]) => string | null | Promise<string | null>
-  >;
+  commands?: Record<string, (args?: string[]) => string | null>;
   onSubmit?: () => void;
 };
 
@@ -85,8 +82,8 @@ export const useEntry = ({ onSubmit, commands }: useEntryParams) => {
 
     if (key === 'Enter') {
       const response = match
-        ? await commands[command](args.trim().split(' '))
-        : `'${command}' command not found`;
+        ? commands[command](args.trim().split(' '))
+        : `'${command}': command not found. Use 'help' for more information.`;
 
       if (onSubmit) {
         onSubmit();
