@@ -1,5 +1,6 @@
 export const theme = {
   colors: {
+    primary: '#e75621',
     gray: '#2c2c2c',
     bash: {
       background: '#282a36',

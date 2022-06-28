@@ -25,6 +25,7 @@ export const Container = styled.section<ContainerProps>`
 
     width: ${({ size }) => size.width};
     height: ${({ size }) => size.height};
+    border-radius: 5px;
   }
 
   &.container-enter-active {
@@ -32,8 +33,13 @@ export const Container = styled.section<ContainerProps>`
 
     width: 100%;
     height: 100%;
+    border-radius: 0;
 
     transition: all 0.3s;
+  }
+
+  &.container-enter-done {
+    border-radius: 0;
   }
 
   &.container-exit {
@@ -41,6 +47,7 @@ export const Container = styled.section<ContainerProps>`
 
     width: 100%;
     height: 100%;
+    border-radius: 0;
   }
 
   &.container-exit-active {
@@ -48,6 +55,7 @@ export const Container = styled.section<ContainerProps>`
 
     width: ${({ size }) => size.width};
     height: ${({ size }) => size.height};
+    border-radius: 5px;
 
     transition: all 0.3s;
   }

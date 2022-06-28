@@ -1,2 +1,3 @@
 export * from './Bash';
-export * from './BashLine';
+export * from './Dock';
+export * from './Header';

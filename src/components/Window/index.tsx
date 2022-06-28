@@ -33,8 +33,8 @@ export const Window: FC<WindowProps> = ({ title, children, ...rest }) => {
       dragHandleClassName="header"
       minWidth={300}
       minHeight={150}
-      maxWidth="100%"
-      maxHeight="100%"
+      maxWidth={enabled ? '97%' : '100%'}
+      maxHeight={enabled ? '97%' : '100%'}
       bounds="parent"
       position={!enabled ? { x: 0, y: 0 } : position}
       size={!enabled ? { width: '100%', height: '100%' } : size}
