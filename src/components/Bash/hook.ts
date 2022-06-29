@@ -53,5 +53,10 @@ export const useCommands = () => {
     setCount(count + 1);
   };
 
-  return { lines, commands, onSubmit };
+  const reset = () => {
+    setLines([0]);
+    setCount(1);
+  };
+
+  return { lines, commands, onSubmit, reset };
 };

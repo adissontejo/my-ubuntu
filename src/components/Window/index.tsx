@@ -1,9 +1,9 @@
 import { FC, ReactNode, useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { IoMdRemove, IoIosSquareOutline, IoMdClose } from 'react-icons/io';
-import { CSSTransition } from 'react-transition-group';
 
 import { Container, Header } from './styles';
+import { Transitions } from './Transitions';
 
 export type WindowProps = {
   title?: string;
@@ -12,33 +12,40 @@ export type WindowProps = {
   defaultX?: number;
   defaultY?: number;
   minimized?: boolean;
+  closed?: boolean;
+  positionZ?: number;
   onClose?: () => void;
   onMinimize?: () => void;
+  bringWindowUp?: () => void;
+  bringWindowDown?: () => void;
   children?: ReactNode;
 };
 
 export const Window: FC<WindowProps> = ({
   title,
-  defaultWidth,
-  defaultHeight,
-  defaultX,
-  defaultY,
+  defaultWidth = '60%',
+  defaultHeight = '80%',
+  defaultX = 50,
+  defaultY = 50,
   minimized,
+  closed,
   children,
+  positionZ = 0,
   onMinimize,
   onClose,
+  bringWindowUp,
+  bringWindowDown,
   ...rest
 }) => {
-  const [closed, setClosed] = useState(false);
   const [enabled, setEnabled] = useState(true);
   const [fullFilled, setFullFilled] = useState(false);
   const [position, setPosition] = useState({
-    x: defaultX || 50,
-    y: defaultY || 50,
+    x: defaultX,
+    y: defaultY,
   });
   const [size, setSize] = useState({
-    width: defaultWidth || '60%',
-    height: defaultHeight || '80%',
+    width: defaultWidth,
+    height: defaultHeight,
   });
 
   const handleFullFill = () => {
@@ -69,43 +76,41 @@ export const Window: FC<WindowProps> = ({
         setPosition(position);
         setSize({ width: ref.style.width, height: ref.style.height });
       }}
+      style={{ zIndex: positionZ }}
     >
-      <CSSTransition
-        in={!minimized && !closed}
-        timeout={300}
-        onExited={closed && onClose}
-        classNames="open"
+      <Transitions
+        minimized={minimized}
+        onMinimizeEnd={bringWindowDown}
+        fullFilled={fullFilled}
+        onFullFillExit={() => setEnabled(true)}
+        open={!closed}
+        onCloseExit={bringWindowDown}
       >
-        <CSSTransition
-          in={fullFilled}
-          timeout={300}
-          onExited={() => setEnabled(true)}
-          classNames="fullFill"
+        <Container
+          className="minimize fullFill close"
+          position={position}
+          size={size}
+          closed={closed || minimized}
+          onMouseDown={bringWindowUp}
+          {...rest}
         >
-          <Container
-            className="fullFill open"
-            position={position}
-            size={size}
-            {...rest}
-          >
-            <Header className="header">
-              <h4>{title}</h4>
-              <div className="buttons">
-                <button onClick={onMinimize}>
-                  <IoMdRemove className="icon" />
-                </button>
-                <button onClick={handleFullFill}>
-                  <IoIosSquareOutline className="icon" />
-                </button>
-                <button onClick={() => setClosed(true)} className="close">
-                  <IoMdClose className="icon" />
-                </button>
-              </div>
-            </Header>
-            {children}
-          </Container>
-        </CSSTransition>
-      </CSSTransition>
+          <Header className="header">
+            <h4>{title}</h4>
+            <div className="buttons">
+              <button onClick={onMinimize}>
+                <IoMdRemove className="icon" />
+              </button>
+              <button onClick={handleFullFill}>
+                <IoIosSquareOutline className="icon" />
+              </button>
+              <button onClick={onClose} className="close">
+                <IoMdClose className="icon" />
+              </button>
+            </div>
+          </Header>
+          {children}
+        </Container>
+      </Transitions>
     </Rnd>
   );
 };

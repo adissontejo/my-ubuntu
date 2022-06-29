@@ -6,7 +6,7 @@ import { Container } from './styles';
 import { useWindows } from './hook';
 
 const Home = () => {
-  const { windows, registerDockItem } = useWindows();
+  const { registerDockItem, registerWindow } = useWindows();
 
   return (
     <Container>
@@ -14,7 +14,9 @@ const Home = () => {
       <Dock>
         <DockItem src={terminal} alt="Terminal" {...registerDockItem('bash')} />
       </Dock>
-      <main>{windows.bash && <Bash {...windows.bash} />}</main>
+      <main>
+        <Bash {...registerWindow('bash')} />
+      </main>
     </Container>
   );
 };

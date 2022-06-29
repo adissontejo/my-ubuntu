@@ -1,4 +1,42 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const minimized = css`
+  top: 50%;
+
+  width: 0;
+  height: 0;
+  opacity: 0;
+
+  overflow: hidden;
+`;
+
+const notMinimized = css`
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+
+  overflow: hidden;
+`;
+
+const closed = css`
+  top: 50%;
+  left: 50%;
+
+  width: 0;
+  height: 0;
+  opacity: 0;
+`;
+
+const open = css`
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+`;
 
 export type ContainerProps = {
   size: {
@@ -9,73 +47,41 @@ export type ContainerProps = {
     x: number;
     y: number;
   };
+  closed: boolean;
 };
 
-const closed = css`
-  margin: 100% 0 0 50%;
-
-  width: 0;
-  height: 0;
-  opacity: 0;
-
-  overflow: hidden;
-`;
-
-const opened = css`
-  margin: 0;
-
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-
-  overflow: hidden;
-`;
-
-const open = keyframes`
-  from {
-    ${closed}
-  }
-
-  to {
-    ${opened}
-  }
-`;
-
 export const Container = styled.section<ContainerProps>`
+  position: absolute;
+
   width: 100%;
   height: 100%;
+  opacity: ${({ closed }) => (closed ? 0 : 1)};
   border-radius: 5px;
   border: 2px solid #252525;
 
   display: flex;
   flex-direction: column;
 
-  animation: ${open} 0.3s linear;
+  overflow: hidden;
 
-  &.open-enter {
-    ${closed}
+  &.minimize-enter {
+    ${notMinimized}
   }
 
-  &.open-enter-active {
-    ${opened}
+  &.minimize-enter-active {
+    ${minimized}
 
     transition: all 0.3s;
   }
 
-  &.open-exit {
-    ${opened}
+  &.minimize-exit {
+    ${minimized}
   }
 
-  &.open-exit-active {
-    ${closed}
+  &.minimize-exit-active {
+    ${notMinimized}
 
     transition: all 0.3s;
-  }
-
-  &.open-exit-done {
-    opacity: 0;
-
-    overflow: hidden;
   }
 
   &.fullFill-enter {
@@ -114,6 +120,26 @@ export const Container = styled.section<ContainerProps>`
     width: ${({ size }) => size.width};
     height: ${({ size }) => size.height};
     border-radius: 5px;
+
+    transition: all 0.3s;
+  }
+
+  &.open-enter {
+    ${closed}
+  }
+
+  &.open-enter-active {
+    ${open}
+
+    transition: all 0.3s;
+  }
+
+  &.open-exit {
+    ${open}
+  }
+
+  &.open-exit-active {
+    ${closed}
 
     transition: all 0.3s;
   }
