@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['tsx'],
+  pageExtensions: ['page.tsx'],
 };
 
 module.exports = nextConfig;

@@ -1,18 +1,14 @@
 import styled from 'styled-components';
 
-import { Window } from '../Window';
+export const Container = styled.div`
+  flex: 1;
 
-export const Container = styled(Window)`
-  .content {
-    flex: 1;
+  background: ${({ theme }) => theme.colors.bash.background};
 
-    background: ${({ theme }) => theme.colors.bash.background};
+  overflow-x: hidden;
+  overflow-y: auto;
 
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar-track-piece {
-      background: #0000;
-    }
+  &::-webkit-scrollbar-track-piece {
+    background: #0000;
   }
 `;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 export type ContainerProps = {
   size: {
@@ -11,6 +11,36 @@ export type ContainerProps = {
   };
 };
 
+const closed = css`
+  margin: 100% 0 0 50%;
+
+  width: 0;
+  height: 0;
+  opacity: 0;
+
+  overflow: hidden;
+`;
+
+const opened = css`
+  margin: 0;
+
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+
+  overflow: hidden;
+`;
+
+const open = keyframes`
+  from {
+    ${closed}
+  }
+
+  to {
+    ${opened}
+  }
+`;
+
 export const Container = styled.section<ContainerProps>`
   width: 100%;
   height: 100%;
@@ -20,7 +50,35 @@ export const Container = styled.section<ContainerProps>`
   display: flex;
   flex-direction: column;
 
-  &.container-enter {
+  animation: ${open} 0.3s linear;
+
+  &.open-enter {
+    ${closed}
+  }
+
+  &.open-enter-active {
+    ${opened}
+
+    transition: all 0.3s;
+  }
+
+  &.open-exit {
+    ${opened}
+  }
+
+  &.open-exit-active {
+    ${closed}
+
+    transition: all 0.3s;
+  }
+
+  &.open-exit-done {
+    opacity: 0;
+
+    overflow: hidden;
+  }
+
+  &.fullFill-enter {
     margin: ${({ position }) => `${position.y}px 0 0 ${position.x}px`};
 
     width: ${({ size }) => size.width};
@@ -28,7 +86,7 @@ export const Container = styled.section<ContainerProps>`
     border-radius: 5px;
   }
 
-  &.container-enter-active {
+  &.fullFill-enter-active {
     margin: 0;
 
     width: 100%;
@@ -38,11 +96,11 @@ export const Container = styled.section<ContainerProps>`
     transition: all 0.3s;
   }
 
-  &.container-enter-done {
+  &.fullFill-enter-done {
     border-radius: 0;
   }
 
-  &.container-exit {
+  &.fullFill-exit {
     margin: 0;
 
     width: 100%;
@@ -50,7 +108,7 @@ export const Container = styled.section<ContainerProps>`
     border-radius: 0;
   }
 
-  &.container-exit-active {
+  &.fullFill-exit-active {
     margin: ${({ position }) => `${position.y}px 0 0 ${position.x}px`};
 
     width: ${({ size }) => size.width};
@@ -109,7 +167,11 @@ export const Header = styled.header`
         height: 14px;
       }
 
-      &:hover {
+      &.close {
+        background: #df4a16;
+      }
+
+      &:not(.close):hover {
         background: #fff3;
       }
     }
