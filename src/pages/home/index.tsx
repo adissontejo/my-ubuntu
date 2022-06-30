@@ -1,6 +1,3 @@
-import terminal from 'public/terminal.png';
-import nautilus from 'public/nautilus.png';
-
 import { Bash, Dock, DockItem, Header, Nautilus } from '~/components';
 
 import { Container } from './styles';
@@ -13,9 +10,13 @@ const Home = () => {
     <Container>
       <Header />
       <Dock>
-        <DockItem src={terminal} alt="Terminal" {...registerDockItem('bash')} />
         <DockItem
-          src={nautilus}
+          src="/dock/terminal.svg"
+          alt="Terminal"
+          {...registerDockItem('bash')}
+        />
+        <DockItem
+          src="/dock/nautilus.svg"
           alt="Arquivos"
           {...registerDockItem('nautilus')}
         />

@@ -1,8 +1,5 @@
 import { FC, ReactNode } from 'react';
 
-import github from 'public/github.png';
-import linkedin from 'public/linkedin.png';
-
 import { Container } from './styles';
 import { DockItem } from '../DockItem';
 
@@ -14,12 +11,12 @@ export const Dock: FC<DockProps> = ({ children }) => (
   <Container>
     {children}
     <DockItem
-      src={github}
+      src="/dock/github.svg"
       alt="GitHub"
       action="https://github.com/adissontejo"
     />
     <DockItem
-      src={linkedin}
+      src="/dock/linkedin.svg"
       alt="LinkedIn"
       action="https://linkedin.com/in/adissontejo"
     />

@@ -4,7 +4,7 @@ import Image, { StaticImageData } from 'next/image';
 import { Container } from './styles';
 
 export type DockItemProps = {
-  src: StaticImageData;
+  src: string | StaticImageData;
   alt: string;
   open?: boolean;
   focus?: boolean;
@@ -29,6 +29,6 @@ export const DockItem: FC<DockItemProps> = ({
   >
     <div className="indicator" />
     <p className="alt">{alt}</p>
-    <Image src={src} alt={alt} width={32} height={32} />
+    <Image src={src} alt={alt} width={32} height={32} objectFit="contain" />
   </Container>
 );
