@@ -25,7 +25,7 @@ export const Container = styled.div`
       max-width: 75px;
       border-radius: 3px;
 
-      color: #e2f5ed;
+      color: white;
     }
 
     &:hover {

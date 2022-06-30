@@ -51,7 +51,7 @@ export const Container = styled.button<ContainerProps>`
     opacity: 0;
     visibility: hidden;
 
-    color: #ece1c5;
+    color: white;
     line-height: 26px;
     text-align: center;
 
