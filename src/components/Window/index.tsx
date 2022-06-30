@@ -78,7 +78,7 @@ export const Window: FC<WindowProps> = ({
         setPosition(position);
         setSize({ width: ref.style.width, height: ref.style.height });
       }}
-      style={{ zIndex: positionZ }}
+      style={{ zIndex: positionZ * 10 }}
     >
       <Transitions
         minimized={minimized}

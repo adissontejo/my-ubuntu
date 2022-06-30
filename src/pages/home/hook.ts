@@ -63,7 +63,7 @@ export const useWindows = () => {
   const registerWindow = (key: string): Partial<WindowProps> => ({
     closed: true,
     ...(windows[key] || {}),
-    positionZ: positions[key],
+    positionZ: positions[key] + 1,
     onClose: () => onClose(key),
     onMinimize: () => onMinimize(key),
     bringWindowUp: () => bringWindowUp(key),

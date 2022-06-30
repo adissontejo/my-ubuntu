@@ -41,7 +41,7 @@ export const Container = styled.button<ContainerProps>`
     position: absolute;
     top: 12px;
     left: 60px;
-    z-index: 100;
+    z-index: 1000;
 
     padding: 0 8px;
 
