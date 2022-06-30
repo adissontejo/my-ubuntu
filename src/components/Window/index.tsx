@@ -13,6 +13,7 @@ export type WindowProps = {
   defaultY?: number;
   minimized?: boolean;
   closed?: boolean;
+  initFullFilled?: boolean;
   positionZ?: number;
   onClose?: () => void;
   onMinimize?: () => void;
@@ -29,6 +30,7 @@ export const Window: FC<WindowProps> = ({
   defaultY = 50,
   minimized,
   closed,
+  initFullFilled,
   children,
   positionZ = 0,
   onMinimize,
@@ -37,8 +39,8 @@ export const Window: FC<WindowProps> = ({
   bringWindowDown,
   ...rest
 }) => {
-  const [enabled, setEnabled] = useState(true);
-  const [fullFilled, setFullFilled] = useState(false);
+  const [enabled, setEnabled] = useState(!initFullFilled);
+  const [fullFilled, setFullFilled] = useState(initFullFilled);
   const [position, setPosition] = useState({
     x: defaultX,
     y: defaultY,
@@ -91,6 +93,7 @@ export const Window: FC<WindowProps> = ({
           position={position}
           size={size}
           closed={closed || minimized}
+          fullFilled={fullFilled}
           onMouseDown={bringWindowUp}
           {...rest}
         >

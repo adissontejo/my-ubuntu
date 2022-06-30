@@ -48,6 +48,7 @@ export type ContainerProps = {
     y: number;
   };
   closed: boolean;
+  fullFilled: boolean;
 };
 
 export const Container = styled.section<ContainerProps>`
@@ -56,7 +57,7 @@ export const Container = styled.section<ContainerProps>`
   width: 100%;
   height: 100%;
   opacity: ${({ closed }) => (closed ? 0 : 1)};
-  border-radius: 5px;
+  border-radius: ${({ fullFilled }) => (fullFilled ? 0 : '5px')};
   border: 2px solid #252525;
 
   display: flex;
@@ -100,10 +101,6 @@ export const Container = styled.section<ContainerProps>`
     border-radius: 0;
 
     transition: all 0.3s;
-  }
-
-  &.fullFill-enter-done {
-    border-radius: 0;
   }
 
   &.fullFill-exit {
@@ -177,7 +174,6 @@ export const Header = styled.header`
       margin: 0 10px 0 0;
 
       background: #0000;
-      border: none;
       border-radius: 100%;
       width: 20px;
       height: 20px;

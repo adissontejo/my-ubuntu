@@ -10,7 +10,6 @@ export const Container = styled.button<ContainerProps>`
 
   width: 50px;
   height: 50px;
-  border: none;
   border-radius: 10%;
   background: ${({ focus }) => (focus ? '#fff3' : '#fff0')};
 
@@ -19,6 +18,7 @@ export const Container = styled.button<ContainerProps>`
 
     > .alt {
       opacity: 1;
+      visibility: initial;
     }
   }
 
@@ -49,11 +49,12 @@ export const Container = styled.button<ContainerProps>`
     border: 1px solid #41424b;
     border-radius: 5px;
     opacity: 0;
+    visibility: hidden;
 
     color: #ece1c5;
     line-height: 26px;
     text-align: center;
 
-    transition: opacity 0.3s;
+    transition: all 0.3s;
   }
 `;

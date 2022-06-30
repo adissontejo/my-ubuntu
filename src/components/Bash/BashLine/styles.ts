@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-  font-family: 'Fira Code', sans-serif;
+  * {
+    ${({ theme }) => theme.fonts.code}
+  }
 `;
 
 export const Title = styled.p`

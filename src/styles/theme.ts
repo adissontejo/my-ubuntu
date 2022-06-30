@@ -11,6 +11,10 @@ export const theme = {
       command: '#41de6a',
     },
   },
+  fonts: {
+    ubuntu: `font-family: 'Ubuntu', sans-serif;`,
+    code: `font-family: 'Fira Code', sans-serif;`,
+  },
 };
 
 export type Theme = typeof theme;
