@@ -7,7 +7,7 @@ export type TransitionsType = {
   fullFilled?: boolean;
   onFullFillExit?: () => void;
   open?: boolean;
-  onCloseExit?: () => void;
+  onOpenExit?: () => void;
   children?: ReactNode;
 };
 
@@ -17,6 +17,7 @@ export const Transitions: FC<TransitionsType> = ({
   fullFilled,
   onFullFillExit,
   open,
+  onOpenExit,
   children,
 }) => (
   <CSSTransition
@@ -35,6 +36,7 @@ export const Transitions: FC<TransitionsType> = ({
         in={open}
         timeout={300}
         classNames="open"
+        onExited={onOpenExit}
         mountOnEnter
         unmountOnExit
       >

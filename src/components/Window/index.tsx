@@ -11,6 +11,8 @@ export type WindowProps = {
   defaultHeight?: number | string;
   defaultX?: number;
   defaultY?: number;
+  minWidth?: number;
+  minHeight?: number;
   minimized?: boolean;
   closed?: boolean;
   initFullFilled?: boolean;
@@ -28,6 +30,8 @@ export const Window: FC<WindowProps> = ({
   defaultHeight = '80%',
   defaultX = 50,
   defaultY = 50,
+  minWidth = 300,
+  minHeight = 150,
   minimized,
   closed,
   initFullFilled,
@@ -64,8 +68,14 @@ export const Window: FC<WindowProps> = ({
   return (
     <Rnd
       dragHandleClassName="header"
-      minWidth={300}
-      minHeight={150}
+      default={{
+        x: defaultX,
+        y: defaultY,
+        width: defaultWidth,
+        height: defaultHeight,
+      }}
+      minWidth={minWidth}
+      minHeight={minHeight}
       maxWidth={enabled ? '97%' : '100%'}
       maxHeight={enabled ? '97%' : '100%'}
       bounds="parent"
@@ -78,7 +88,7 @@ export const Window: FC<WindowProps> = ({
         setPosition(position);
         setSize({ width: ref.style.width, height: ref.style.height });
       }}
-      style={{ zIndex: positionZ * 10, left: '20%' }}
+      style={{ zIndex: positionZ * 10 }}
     >
       <Transitions
         minimized={minimized}
@@ -86,7 +96,7 @@ export const Window: FC<WindowProps> = ({
         fullFilled={fullFilled}
         onFullFillExit={() => setEnabled(true)}
         open={!closed}
-        onCloseExit={bringWindowDown}
+        onOpenExit={bringWindowDown}
       >
         <Container
           className="minimize fullFill close"

@@ -9,8 +9,10 @@ export const Container = styled.div`
 
   > .folders {
     flex: 1;
+    height: fit-content;
 
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: space-evenly;
   }
 `;

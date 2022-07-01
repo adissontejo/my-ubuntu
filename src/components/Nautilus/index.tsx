@@ -9,12 +9,26 @@ type NautilusProps = WindowProps;
 
 export const Nautilus: FC<NautilusProps> = ({ ...rest }) => {
   return (
-    <Window title="Arquivos" initFullFilled {...rest}>
+    <Window title="Arquivos" minWidth={600} initFullFilled {...rest}>
       <Container>
         <Sidebar />
         <div className="folders">
-          <Folder name="Pasta 1" />
-          <Folder name="Pasta 2" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
+          <Folder name="Pasta" />
         </div>
       </Container>
     </Window>

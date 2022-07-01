@@ -9,17 +9,15 @@ export type FolderProps = {
 
 export const Folder: FC<FolderProps> = ({ name }) => (
   <Container>
-    <button className="button">
-      <div className="icon">
-        <Image
-          src="/nautilus/folder.svg"
-          alt={name}
-          width={48}
-          height={48}
-          objectFit="contain"
-        />
-      </div>
-      <p className="name">{name}</p>
-    </button>
+    <div className="icon">
+      <Image
+        src="/nautilus/folder.svg"
+        alt={name}
+        width={48}
+        height={48}
+        objectFit="contain"
+      />
+    </div>
+    <p className="name">{name}</p>
   </Container>
 );
