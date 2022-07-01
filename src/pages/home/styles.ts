@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const init = keyframes`
+  from {
+    filter: brightness(0);
+  }
+
+  to {
+    filter: brightness(1);
+  }
+`;
 
 export const Container = styled.div`
   width: 100vw;
@@ -13,6 +23,8 @@ export const Container = styled.div`
     'head head' 25px
     'aside main' 1fr
     / 60px 1fr;
+
+  animation: ${init} 2s ease-in;
 
   > main {
     position: relative;
