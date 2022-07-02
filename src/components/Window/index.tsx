@@ -107,7 +107,7 @@ export const Window: FC<WindowProps> = ({
           onMouseDown={bringWindowUp}
           {...rest}
         >
-          <Header className="header">
+          <Header className="header" onDoubleClick={handleFullFill}>
             <h4>{title}</h4>
             <div className="buttons">
               <button onClick={onMinimize}>

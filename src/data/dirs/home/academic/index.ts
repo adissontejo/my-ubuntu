@@ -9,7 +9,7 @@ export const academic: Dir = {
         {
           name: 'Instituição',
           type: 'png',
-          src: 'ifpb.png',
+          src: '/icons/ifpb.png',
         },
         {
           name: 'Sobre',
@@ -23,7 +23,7 @@ export const academic: Dir = {
         {
           name: 'Instituição',
           type: 'png',
-          src: 'ufrn.png',
+          src: '/icons/ufrn.png',
         },
         {
           name: 'Sobre',

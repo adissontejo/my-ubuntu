@@ -6,7 +6,7 @@ import { Container } from './styles';
 export type FileProps = {
   name: string;
   type: string;
-  src?: string;
+  src: string;
 };
 
 export const File: FC<FileProps> = ({ name, type, src }) => {
@@ -14,7 +14,7 @@ export const File: FC<FileProps> = ({ name, type, src }) => {
     <Container>
       <div className="icon">
         <Image
-          src={`/nautilus/mimetypes/${src || `${type}.svg`}`}
+          src={src || `/nautilus/mimetypes/${type}.svg`}
           alt={name}
           width={48}
           height={48}
