@@ -29,6 +29,13 @@ export const DockItem: FC<DockItemProps> = ({
   >
     <div className="indicator" />
     <p className="alt">{alt}</p>
-    <Image src={src} alt={alt} width={32} height={32} objectFit="contain" />
+    <Image
+      src={src}
+      alt={alt}
+      width={32}
+      height={32}
+      objectFit="contain"
+      draggable={false}
+    />
   </Container>
 );

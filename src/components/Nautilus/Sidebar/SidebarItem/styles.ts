@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
-export const Container = styled.button`
+export type ContainerProps = {
+  selected: boolean;
+};
+
+export const Container = styled.button<ContainerProps>`
   padding: 0 30px 0 10px;
   gap: 7px;
 
   width: 100%;
-  background: #474747;
   height: 40px;
+  background: ${({ selected, theme }) =>
+    selected ? theme.colors.primary : '#474747'};
 
   display: flex;
   align-items: center;
@@ -18,9 +23,5 @@ export const Container = styled.button`
 
   &:hover {
     filter: brightness(1.1);
-  }
-
-  &:focus {
-    background: ${({ theme }) => theme.colors.primary};
   }
 `;
