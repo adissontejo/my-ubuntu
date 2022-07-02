@@ -25,7 +25,8 @@ export type InputProps = {
 };
 
 export const Input = styled.p<InputProps>`
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
 
   > .arrow {
     color: ${({ theme }) => theme.colors.bash.command};

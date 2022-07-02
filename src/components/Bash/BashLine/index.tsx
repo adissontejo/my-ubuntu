@@ -20,18 +20,18 @@ export const BashLine: FC<BashLineProps> = ({
 
   const [cursorActive, setCursorActive] = useState(true);
 
-  const container = useRef<HTMLDivElement>();
+  const cursorRef = useRef<HTMLSpanElement>();
 
   useEffect(() => {
-    container.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+    cursorRef.current.scrollIntoView();
+  }, [cursor]);
 
   useEffect(() => {
     setTimeout(() => setCursorActive(!cursorActive), 300);
   }, [cursorActive]);
 
   return (
-    <Container ref={container} {...rest}>
+    <Container {...rest}>
       <Title>
         <strong className="user">adisson</strong> in{' '}
         <strong className="dir">~</strong>
@@ -42,7 +42,9 @@ export const BashLine: FC<BashLineProps> = ({
           <strong className="value">
             <span className="command">
               {command.substring(0, cursor)}
-              <span className="cursor">{command[cursor]}</span>
+              <span className="cursor" ref={cursorRef}>
+                {command[cursor]}
+              </span>
               {command.substring(cursor + 1)}
             </span>
             <span className="args">{value.substring(command.length)}</span>
@@ -52,7 +54,9 @@ export const BashLine: FC<BashLineProps> = ({
             <span className="command">{command}</span>
             <span className="args">
               {value.substring(command.length, cursor)}
-              <span className="cursor">{value[cursor]}</span>
+              <span className="cursor" ref={cursorRef}>
+                {value[cursor]}
+              </span>
               {value.substring(cursor + 1)}
             </span>
           </strong>
