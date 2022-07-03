@@ -1,29 +1,66 @@
-import { Bash, Dock, DockItem, Header, Nautilus } from '~/components';
+import { Bash, Dock, DockProps, Header, Nautilus } from '~/components';
+import { useWindows } from '~/hooks';
+import { WindowKey, WindowValue } from '~/types';
 
 import { Container } from './styles';
-import { useWindows } from './hook';
 
 const Home = () => {
-  const { registerDockItem, registerWindow } = useWindows();
+  const {
+    windows,
+    positions,
+    openWindow,
+    minimizeWindow,
+    softCloseWindow,
+    closeWindow,
+    main,
+  } = useWindows();
+
+  const dockItems: DockProps['items'] = [
+    {
+      key: 'bash',
+      name: 'Terminal',
+    },
+    {
+      key: 'nautilus',
+      name: 'Arquivos',
+    },
+  ];
+
+  const ToComponent = (key: WindowKey) => {
+    switch (key) {
+      case 'bash':
+        return Bash;
+      case 'nautilus':
+        return Nautilus;
+    }
+  };
 
   return (
     <Container>
       <Header />
-      <Dock>
-        <DockItem
-          src="/dock/terminal.svg"
-          alt="Terminal"
-          {...registerDockItem('bash')}
-        />
-        <DockItem
-          src="/dock/nautilus.svg"
-          alt="Arquivos"
-          {...registerDockItem('nautilus')}
-        />
-      </Dock>
-      <main>
-        <Bash {...registerWindow('bash')} />
-        <Nautilus {...registerWindow('nautilus')} />
+      <Dock items={dockItems} />
+      <main ref={main}>
+        {Object.entries(windows).map(
+          ([key, value]: [WindowKey, WindowValue]) => {
+            if (!value) {
+              return null;
+            }
+
+            const Component = ToComponent(key);
+
+            return (
+              <Component
+                key={key}
+                {...value}
+                positionZ={positions[key]}
+                onMinimize={() => minimizeWindow(key)}
+                onClose={() => softCloseWindow(key)}
+                onCloseEnd={() => closeWindow(key)}
+                onFocus={() => openWindow(key)}
+              />
+            );
+          }
+        )}
       </main>
     </Container>
   );

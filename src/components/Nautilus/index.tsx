@@ -8,13 +8,20 @@ import { Folder } from './Folder';
 import { File } from './File';
 import { Sidebar } from './Sidebar';
 
-type NautilusProps = WindowProps;
+export type NautilusProps = WindowProps;
 
 export const Nautilus: FC<NautilusProps> = ({ ...rest }) => {
   const [dir, setDir] = useState(home);
 
   return (
-    <Window title="Arquivos" minWidth={600} initFullFilled {...rest}>
+    <Window
+      title="Arquivos"
+      defaultWidthPercent={70}
+      defaultHeightPercent={85}
+      minWidth={600}
+      minHeight={400}
+      {...rest}
+    >
       <Container>
         <Sidebar dirname={dir.name} onSelectDir={setDir} />
         <div className="folders">

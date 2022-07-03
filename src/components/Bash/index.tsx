@@ -5,19 +5,18 @@ import { useCommands } from './hook';
 import { BashLine } from './BashLine';
 import { Window, WindowProps } from '../Window';
 
-export const Bash: FC<WindowProps> = ({ onClose, ...rest }) => {
-  const { lines, commands, onSubmit, reset } = useCommands();
+export type BashProps = WindowProps;
 
-  const onWindowClose = () => {
-    reset();
-
-    if (onClose) {
-      onClose();
-    }
-  };
+export const Bash: FC<BashProps> = ({ ...rest }) => {
+  const { lines, commands, onSubmit } = useCommands();
 
   return (
-    <Window title="Terminal" onClose={onWindowClose} {...rest}>
+    <Window
+      title="Terminal"
+      defaultWidthPercent={55}
+      defaultHeightPercent={65}
+      {...rest}
+    >
       <Container>
         {lines.map(item => (
           <BashLine key={item} onSubmit={onSubmit} commands={commands} />

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const minimized = css`
   top: 50%;
@@ -38,6 +38,16 @@ const open = css`
   opacity: 1;
 `;
 
+const keyframe = keyframes`
+  from {
+    ${closed}
+  }
+
+  to {
+    ${open}
+  }
+`;
+
 export type ContainerProps = {
   size: {
     width: number | string;
@@ -54,6 +64,8 @@ export type ContainerProps = {
 export const Container = styled.section<ContainerProps>`
   position: absolute;
 
+  margin: ${({ fullFilled }) => (fullFilled ? '0' : '2px')};
+
   width: 100%;
   height: 100%;
   opacity: ${({ closed }) => (closed ? 0 : 1)};
@@ -64,6 +76,8 @@ export const Container = styled.section<ContainerProps>`
   flex-direction: column;
 
   overflow: hidden;
+
+  animation: ${keyframe} 0.3s;
 
   &.minimize-enter {
     ${notMinimized}
@@ -86,7 +100,10 @@ export const Container = styled.section<ContainerProps>`
   }
 
   &.fullFill-enter {
-    margin: ${({ position }) => `${position.y}px 0 0 ${position.x}px`};
+    top: ${({ position }) => position.y}px;
+    left: ${({ position }) => position.x}px;
+
+    margin: 1px;
 
     width: ${({ size }) => size.width};
     height: ${({ size }) => size.height};
@@ -94,6 +111,9 @@ export const Container = styled.section<ContainerProps>`
   }
 
   &.fullFill-enter-active {
+    top: 0;
+    left: 0;
+
     margin: 0;
 
     width: 100%;
@@ -104,6 +124,9 @@ export const Container = styled.section<ContainerProps>`
   }
 
   &.fullFill-exit {
+    top: 0;
+    left: 0;
+
     margin: 0;
 
     width: 100%;
@@ -112,7 +135,10 @@ export const Container = styled.section<ContainerProps>`
   }
 
   &.fullFill-exit-active {
-    margin: ${({ position }) => `${position.y}px 0 0 ${position.x}px`};
+    top: ${({ position }) => position.y}px;
+    left: ${({ position }) => position.x}px;
+
+    margin: 1px;
 
     width: ${({ size }) => size.width};
     height: ${({ size }) => size.height};
@@ -121,21 +147,11 @@ export const Container = styled.section<ContainerProps>`
     transition: all 0.3s;
   }
 
-  &.open-enter {
-    ${closed}
-  }
-
-  &.open-enter-active {
-    ${open}
-
-    transition: all 0.3s;
-  }
-
-  &.open-exit {
+  &.close-enter {
     ${open}
   }
 
-  &.open-exit-active {
+  &.close-enter-active {
     ${closed}
 
     transition: all 0.3s;

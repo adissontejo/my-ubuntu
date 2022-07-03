@@ -1,110 +1,94 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
 import { Rnd } from 'react-rnd';
 import { IoMdRemove, IoIosSquareOutline, IoMdClose } from 'react-icons/io';
 
 import { Container, Header } from './styles';
+import { useRnd } from './hook';
 import { Transitions } from './Transitions';
 
 export type WindowProps = {
   title?: string;
-  defaultWidth?: number | string;
-  defaultHeight?: number | string;
-  defaultX?: number;
-  defaultY?: number;
+  defaultWidthPercent?: number;
+  defaultHeightPercent?: number;
   minWidth?: number;
   minHeight?: number;
   minimized?: boolean;
   closed?: boolean;
-  initFullFilled?: boolean;
   positionZ?: number;
-  onClose?: () => void;
   onMinimize?: () => void;
-  bringWindowUp?: () => void;
-  bringWindowDown?: () => void;
+  onClose?: () => void;
+  onCloseEnd?: () => void;
+  onFocus?: () => void;
   children?: ReactNode;
 };
 
 export const Window: FC<WindowProps> = ({
   title,
-  defaultWidth = '60%',
-  defaultHeight = '80%',
-  defaultX = 50,
-  defaultY = 50,
+  defaultWidthPercent = 60,
+  defaultHeightPercent = 80,
   minWidth = 300,
   minHeight = 150,
   minimized,
   closed,
-  initFullFilled,
   children,
   positionZ = 0,
   onMinimize,
   onClose,
-  bringWindowUp,
-  bringWindowDown,
+  onCloseEnd,
+  onFocus,
   ...rest
 }) => {
-  const [enabled, setEnabled] = useState(!initFullFilled);
-  const [fullFilled, setFullFilled] = useState(initFullFilled);
-  const [position, setPosition] = useState({
-    x: defaultX,
-    y: defaultY,
+  const {
+    position,
+    dragPosition,
+    size,
+    resizeSize,
+    enabled,
+    fullFilled,
+    onMinimizeEntered,
+    onMiminizeExit,
+    handleFullFill,
+    onFullFillExited,
+    onDragStop,
+    onResizeStop,
+  } = useRnd({
+    defaultWidthPercent,
+    defaultHeightPercent,
+    minimized,
   });
-  const [size, setSize] = useState({
-    width: defaultWidth,
-    height: defaultHeight,
-  });
-
-  const handleFullFill = () => {
-    if (fullFilled) {
-      setFullFilled(false);
-
-      return;
-    }
-
-    setFullFilled(true);
-    setEnabled(false);
-  };
 
   return (
     <Rnd
       dragHandleClassName="header"
-      default={{
-        x: defaultX,
-        y: defaultY,
-        width: defaultWidth,
-        height: defaultHeight,
-      }}
       minWidth={minWidth}
       minHeight={minHeight}
-      maxWidth={enabled ? '97%' : '100%'}
-      maxHeight={enabled ? '97%' : '100%'}
+      maxWidth="100%"
+      maxHeight="100%"
       bounds="parent"
-      position={!enabled ? { x: 0, y: 0 } : position}
-      size={!enabled ? { width: '100%', height: '100%' } : size}
+      position={position}
+      size={size}
       enableResizing={enabled}
       disableDragging={!enabled}
-      onDragStop={(event, data) => setPosition({ x: data.x, y: data.y })}
-      onResizeStop={(event, dir, ref, delta, position) => {
-        setPosition(position);
-        setSize({ width: ref.style.width, height: ref.style.height });
-      }}
+      onDragStop={onDragStop}
+      onResizeStop={onResizeStop}
       style={{ zIndex: positionZ * 10 }}
     >
       <Transitions
         minimized={minimized}
-        onMinimizeEnd={bringWindowDown}
+        onMinimizeEntered={onMinimizeEntered}
+        onMinimizeExit={onMiminizeExit}
         fullFilled={fullFilled}
-        onFullFillExit={() => setEnabled(true)}
-        open={!closed}
-        onOpenExit={bringWindowDown}
+        onFullFillExited={onFullFillExited}
+        closed={closed}
+        onCloseEntered={onCloseEnd}
       >
         <Container
           className="minimize fullFill close"
-          position={position}
-          size={size}
+          position={dragPosition}
+          size={resizeSize}
           closed={closed || minimized}
           fullFilled={fullFilled}
-          onMouseDown={bringWindowUp}
+          onMouseDown={onFocus}
           {...rest}
         >
           <Header className="header" onDoubleClick={handleFullFill}>
