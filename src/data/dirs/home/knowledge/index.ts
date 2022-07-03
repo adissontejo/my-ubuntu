@@ -42,6 +42,11 @@ export const knowledge: Dir = {
           src: '/icons/css.svg',
         },
         {
+          name: 'SASS',
+          type: 'png',
+          src: '/icons/sass.svg',
+        },
+        {
           name: 'C',
           type: 'png',
           src: '/icons/c.svg',
@@ -64,7 +69,7 @@ export const knowledge: Dir = {
       ],
     },
     {
-      name: 'Frameworks e Sistemas',
+      name: 'Frameworks e Ferramentas',
       files: [
         {
           name: 'ReactJS',
@@ -85,6 +90,36 @@ export const knowledge: Dir = {
           name: 'NextJS',
           type: 'png',
           src: '/icons/next.svg',
+        },
+        {
+          name: 'Git',
+          type: 'png',
+          src: '/icons/git.svg',
+        },
+        {
+          name: 'VSCode',
+          type: 'png',
+          src: '/icons/vscode.svg',
+        },
+        {
+          name: 'Linux',
+          type: 'png',
+          src: '/icons/linux.svg',
+        },
+        {
+          name: 'Docker',
+          type: 'png',
+          src: '/icons/docker.svg',
+        },
+        {
+          name: 'Docker Compose',
+          type: 'png',
+          src: '/icons/docker-compose.png',
+        },
+        {
+          name: 'Jest',
+          type: 'png',
+          src: '/icons/jest.svg',
         },
       ],
     },

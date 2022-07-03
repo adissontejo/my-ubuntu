@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useRef, useState } from 'react';
 
 import { home } from '~/data';
 
@@ -11,7 +11,54 @@ import { Sidebar } from './Sidebar';
 export type NautilusProps = WindowProps;
 
 export const Nautilus: FC<NautilusProps> = ({ ...rest }) => {
-  const [dir, setDir] = useState(home);
+  const [location, setLocation] = useState<number[]>([]);
+
+  const forward = useRef<number[]>([]);
+
+  const dir = useMemo(
+    () => location.reduce((acc, curr) => acc.folders[curr], home),
+    [location]
+  );
+
+  const onSidebarSelect = (newLocation: number[]) => {
+    forward.current = [];
+
+    setLocation(newLocation);
+  };
+
+  const onFolderSelect = (index: number) => {
+    const next = forward.current.pop();
+
+    if (next !== index) {
+      forward.current = [];
+    }
+
+    setLocation(prev => [...prev, index]);
+  };
+
+  const onBack = () => {
+    if (location.length === 0) {
+      return;
+    }
+
+    const last = location.find((item, index) => index === location.length - 1);
+
+    forward.current.push(last);
+
+    setLocation(prev =>
+      prev.filter((item, index) => index !== location.length - 1)
+    );
+  };
+
+  const onForward = () => {
+    if (forward.current.length === 0) {
+      return;
+    }
+
+    const next = forward.current.pop();
+
+    setLocation(prev => [...prev, next]);
+  };
 
   return (
     <Window
@@ -20,17 +67,26 @@ export const Nautilus: FC<NautilusProps> = ({ ...rest }) => {
       defaultHeightPercent={85}
       minWidth={600}
       minHeight={400}
+      navigateEnabled
+      backEnabled={location.length > 0}
+      forwardEnabled={forward.current.length > 0}
+      onBack={onBack}
+      onForward={onForward}
       {...rest}
     >
       <Container>
-        <Sidebar dirname={dir.name} onSelectDir={setDir} />
+        <Sidebar
+          dirname={dir.name}
+          level={location.length}
+          onSelectDir={onSidebarSelect}
+        />
         <div className="folders">
           {dir.folders &&
             dir.folders.map((item, index) => (
               <Folder
                 key={index}
                 name={item.name}
-                action={() => setDir(item)}
+                action={() => onFolderSelect(index)}
                 src={item.src}
               />
             ))}

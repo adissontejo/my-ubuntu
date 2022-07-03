@@ -10,6 +10,7 @@ export const Container = styled.div`
   > .folders {
     flex: 1;
     height: fit-content;
+    overflow: auto;
 
     display: grid;
     grid-template-columns: repeat(auto-fill, 120px);

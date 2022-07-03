@@ -72,4 +72,5 @@ export const Input = styled.p<InputProps>`
 export const Response = styled.p`
   color: white;
   white-space: pre-wrap;
+  word-break: break-all;
 `;

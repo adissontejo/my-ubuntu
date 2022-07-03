@@ -158,10 +158,16 @@ export const Container = styled.section<ContainerProps>`
   }
 `;
 
-export const Header = styled.header`
+export type HeaderProps = {
+  backEnabled?: boolean;
+  forwardEnabled?: boolean;
+  navigateEnabled?: boolean;
+};
+
+export const Header = styled.header<HeaderProps>`
   position: relative;
 
-  padding: 15px 0;
+  padding: 5px 0;
 
   background: ${({ theme }) => theme.colors.gray};
   border-width: 0 0 2px 0;
@@ -172,46 +178,78 @@ export const Header = styled.header`
   align-items: center;
   justify-content: center;
 
-  > h4 {
-    margin: 0 0 0 72px;
+  > .back,
+  .forward {
+    padding: 10px 0;
 
+    opacity: ${({ navigateEnabled }) => (navigateEnabled ? 1 : 0)};
+    width: 35px;
+    height: 35px;
+    background: #4d4d4d;
+    border: 1px solid #222222;
+  }
+
+  > .back {
+    margin: 0 0 0 5px;
+
+    border-radius: 5px 0 0 5px;
+    border-style: solid none solid solid;
+
+    ${({ backEnabled }) => !backEnabled && 'filter: brightness(0.7);'}
+
+    &:hover {
+      filter: ${({ backEnabled }) =>
+        backEnabled ? 'brightness(1.1)' : 'brightness(0.7)'};
+    }
+  }
+
+  > .forward {
+    border-radius: 0 5px 5px 0;
+
+    ${({ forwardEnabled }) => !forwardEnabled && 'filter: brightness(0.7);'}
+
+    &:hover {
+      filter: ${({ forwardEnabled }) =>
+        forwardEnabled ? 'brightness(1.1)' : 'brightness(0.7)'};
+    }
+  }
+
+  > h4 {
     flex: 1;
+
+    margin: 0 0 0 15px;
 
     color: white;
     font-weight: 700;
     text-align: center;
   }
 
-  > .buttons {
+  > .action-button {
+    padding: 3px;
+    margin: 0 10px 0 0;
+
+    background: #0000;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+
     display: flex;
+    align-items: center;
 
-    > button {
-      padding: 3px;
-      margin: 0 10px 0 0;
+    transition: background 200ms;
 
-      background: #0000;
-      border-radius: 100%;
-      width: 20px;
-      height: 20px;
+    > .icon {
+      color: white;
+      width: 14px;
+      height: 14px;
+    }
 
-      display: flex;
-      align-items: center;
+    &:hover {
+      background: #fff3;
+    }
 
-      transition: background 200ms;
-
-      > .icon {
-        color: white;
-        width: 14px;
-        height: 14px;
-      }
-
-      &.close {
-        background: #df4a16;
-      }
-
-      &:not(.close):hover {
-        background: #fff3;
-      }
+    &.close {
+      background: #df4a16;
     }
   }
 `;

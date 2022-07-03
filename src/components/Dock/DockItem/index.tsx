@@ -36,6 +36,7 @@ export const DockItem: FC<DockItemProps> = ({
       height={32}
       objectFit="contain"
       draggable={false}
+      priority={true}
     />
   </Container>
 );

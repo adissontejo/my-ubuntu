@@ -20,6 +20,7 @@ export const File: FC<FileProps> = ({ name, type, src }) => {
           height={48}
           objectFit="contain"
           draggable={false}
+          priority={true}
         />
       </div>
       <p className="name">
