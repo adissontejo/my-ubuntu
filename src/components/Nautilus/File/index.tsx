@@ -23,7 +23,8 @@ export const File: FC<FileProps> = ({ name, type, src }) => {
         />
       </div>
       <p className="name">
-        {name}.{type}
+        {name}
+        <wbr />.{type}
       </p>
     </Container>
   );

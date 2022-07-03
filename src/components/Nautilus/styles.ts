@@ -12,7 +12,7 @@ export const Container = styled.div`
     height: fit-content;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-columns: repeat(auto-fill, 120px);
     justify-content: space-evenly;
   }
 `;

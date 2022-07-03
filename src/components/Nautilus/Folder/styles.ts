@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  margin: 5px 0 0;
+  margin: 15px 0 0;
 
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ export const Container = styled.button`
     margin: 3px 0 0;
     padding: 3px;
 
-    max-width: 75px;
+    max-width: 100px;
     border-radius: 3px;
 
     color: white;
