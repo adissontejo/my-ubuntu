@@ -29,6 +29,8 @@ export const Input = styled.p<InputProps>`
   word-break: break-all;
 
   > .arrow {
+    margin: 0 6px 0 0;
+
     color: ${({ theme }) => theme.colors.bash.command};
   }
 

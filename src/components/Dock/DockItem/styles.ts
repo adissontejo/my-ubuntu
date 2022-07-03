@@ -54,6 +54,7 @@ export const Container = styled.button<ContainerProps>`
     color: white;
     line-height: 26px;
     text-align: center;
+    white-space: nowrap;
 
     transition: all 0.3s;
   }

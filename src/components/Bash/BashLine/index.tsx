@@ -37,7 +37,7 @@ export const BashLine: FC<BashLineProps> = ({
         <strong className="dir">~</strong>
       </Title>
       <Input match={match} cursorActive={cursorActive && active}>
-        <span className="arrow">➜</span>{' '}
+        <span className="arrow">➜</span>
         {cursor < command.length ? (
           <strong className="value">
             <span className="command">
