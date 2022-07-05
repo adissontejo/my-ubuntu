@@ -37,7 +37,6 @@ class MyDocument extends Document {
     return (
       <Html lang="pt">
         <Head>
-          <title>Ádisson</title>
           <meta charSet="utf-8" />
           <link
             href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"

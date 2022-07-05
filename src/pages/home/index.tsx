@@ -1,4 +1,4 @@
-import { Bash, Dock, DockProps, Header, Nautilus } from '~/components';
+import { Bash, Dock, DockProps, Header, Medals, Nautilus } from '~/components';
 import { useWindows } from '~/hooks';
 import { WindowKey, WindowValue } from '~/types';
 
@@ -24,6 +24,10 @@ const Home = () => {
       key: 'nautilus',
       name: 'Arquivos',
     },
+    {
+      key: 'medals',
+      name: 'Medalhas',
+    },
   ];
 
   const ToComponent = (key: WindowKey) => {
@@ -32,6 +36,8 @@ const Home = () => {
         return Bash;
       case 'nautilus':
         return Nautilus;
+      case 'medals':
+        return Medals;
     }
   };
 

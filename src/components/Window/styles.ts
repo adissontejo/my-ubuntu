@@ -169,7 +169,7 @@ export const Header = styled.header<HeaderProps>`
 
   padding: 5px 0;
 
-  background: ${({ theme }) => theme.colors.gray};
+  background: #2c2c2c;
   border-width: 0 0 2px 0;
   border-style: none none solid none;
   border-color: #252525;
@@ -187,6 +187,10 @@ export const Header = styled.header<HeaderProps>`
     height: 35px;
     background: #4d4d4d;
     border: 1px solid #222222;
+
+    > .icon {
+      height: 15px;
+    }
   }
 
   > .back {

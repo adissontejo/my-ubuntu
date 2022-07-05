@@ -42,7 +42,10 @@ export const WindowsProvider = ({ children }) => {
     {}
   );
 
-  const main = useRef<HTMLElement>();
+  const main = useRef<HTMLElement>({
+    clientWidth: 500,
+    clientHeight: 500,
+  } as HTMLElement);
 
   const bringWindowUp = (key: WindowKey) => {
     order.current = order.current.filter(item => item !== key);

@@ -16,6 +16,12 @@ export const Container = styled.button<ContainerProps>`
   display: flex;
   align-items: center;
 
+  > .icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
   > .label {
     color: white;
     font-size: 15px;

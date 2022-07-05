@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Image from 'next/image';
 
 import { Container } from './styles';
 
@@ -18,14 +17,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({
 }) => {
   return (
     <Container selected={selected} onClick={onSelect}>
-      <Image
-        src={src}
-        alt={label}
-        width={16}
-        height={16}
-        objectFit="contain"
-        draggable={false}
-      />
+      <img src={src} alt={label} draggable={false} className="icon" />
       <p className="label">{label}</p>
     </Container>
   );

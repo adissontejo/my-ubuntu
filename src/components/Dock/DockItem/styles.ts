@@ -58,4 +58,10 @@ export const Container = styled.button<ContainerProps>`
 
     transition: all 0.3s;
   }
+
+  > .icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
 `;

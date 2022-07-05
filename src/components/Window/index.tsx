@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Rnd } from 'react-rnd';
 import { IoMdRemove, IoIosSquareOutline, IoMdClose } from 'react-icons/io';
-import Image from 'next/image';
 
 import { Container, Header } from './styles';
 import { useRnd } from './hook';
@@ -110,22 +109,10 @@ export const Window: FC<WindowProps> = ({
             forwardEnabled={forwardEnabled}
           >
             <button onClick={onBack} className="back">
-              <Image
-                src="/actions/back.svg"
-                alt="Voltar"
-                width={35}
-                height={15}
-                objectFit="contain"
-              />
+              <img src="/actions/back.svg" alt="Voltar" className="icon" />
             </button>
             <button onClick={onForward} className="forward">
-              <Image
-                src="/actions/forward.svg"
-                alt="Avançar"
-                width={35}
-                height={15}
-                objectFit="contain"
-              />
+              <img src="/actions/forward.svg" alt="Avançar" className="icon" />
             </button>
             <h4>{title}</h4>
             <button onClick={onMinimize} className="action-button">

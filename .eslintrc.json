@@ -9,6 +9,7 @@
   "rules": {
     "prettier/prettier": "error",
     "react-hooks/exhaustive-deps": "off",
+    "@next/next/no-img-element": "off",
     "@typescript-eslint/no-empty-interface": "off"
   }
 }

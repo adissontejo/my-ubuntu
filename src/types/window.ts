@@ -1,7 +1,8 @@
-import { BashProps, NautilusProps } from '~/components';
+import { BashProps, MedalsProps, NautilusProps } from '~/components';
 
 export type Windows = {
   bash?: BashProps;
+  medals?: MedalsProps;
   nautilus?: NautilusProps;
 };
 

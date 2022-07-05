@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import Image, { StaticImageData } from 'next/image';
 
 import { Container } from './styles';
 
 export type DockItemProps = {
-  src: string | StaticImageData;
+  src: string;
   alt: string;
   open?: boolean;
   focus?: boolean;
@@ -29,14 +28,6 @@ export const DockItem: FC<DockItemProps> = ({
   >
     <div className="indicator" />
     <p className="alt">{alt}</p>
-    <Image
-      src={src}
-      alt={alt}
-      width={32}
-      height={32}
-      objectFit="contain"
-      draggable={false}
-      priority={true}
-    />
+    <img src={src} alt={alt} draggable={false} className="icon" />
   </Container>
 );

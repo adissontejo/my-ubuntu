@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Image from 'next/image';
 
 import { Container } from './styles';
 
@@ -12,17 +11,12 @@ export type FileProps = {
 export const File: FC<FileProps> = ({ name, type, src }) => {
   return (
     <Container>
-      <div className="icon">
-        <Image
-          src={src || `/nautilus/mimetypes/${type}.svg`}
-          alt={name}
-          width={48}
-          height={48}
-          objectFit="contain"
-          draggable={false}
-          priority={true}
-        />
-      </div>
+      <img
+        src={src || `/nautilus/mimetypes/${type}.svg`}
+        alt={name}
+        draggable={false}
+        className="icon"
+      />
       <p className="name">
         {name}
         <wbr />.{type}

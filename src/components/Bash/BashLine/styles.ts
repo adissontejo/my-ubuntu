@@ -7,15 +7,15 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.p`
-  color: ${({ theme }) => theme.colors.bash.title};
+  color: #5f45a4;
   font-weight: 700;
 
   > .user {
-    color: ${({ theme }) => theme.colors.bash.username};
+    color: #e1f34a;
   }
 
   > .dir {
-    color: ${({ theme }) => theme.colors.bash.dirname};
+    color: #75d7ec;
   }
 `;
 
@@ -31,23 +31,21 @@ export const Input = styled.p<InputProps>`
   > .arrow {
     margin: 0 6px 0 0;
 
-    color: ${({ theme }) => theme.colors.bash.command};
+    color: #41de6a;
   }
 
   > .value {
     > .command {
-      color: ${({ theme, match }) =>
-        match ? theme.colors.bash.command : theme.colors.bash.input};
+      color: ${({ match }) => (match ? '#41de6a' : '#e356a7')};
       font-weight: ${({ match }) => (match ? 400 : 700)};
 
       ${({ cursorActive, match }) =>
         cursorActive &&
         css`
           > .cursor {
-            background: ${({ theme }) =>
-              match ? theme.colors.bash.command : theme.colors.bash.input};
+            background: ${match ? '#41de6a' : '#e356a7'};
 
-            color: ${({ theme }) => theme.colors.bash.background};
+            color: #282a36;
           }
         `}
     }
@@ -62,7 +60,7 @@ export const Input = styled.p<InputProps>`
           > .cursor {
             background: white;
 
-            color: ${({ theme }) => theme.colors.bash.background};
+            color: #282a36;
           }
         `}
     }
