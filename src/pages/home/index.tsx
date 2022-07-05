@@ -62,7 +62,7 @@ const Home = () => {
                 onMinimize={() => minimizeWindow(key)}
                 onClose={() => softCloseWindow(key)}
                 onCloseEnd={() => closeWindow(key)}
-                onFocus={() => openWindow(key)}
+                onFocus={() => (value.minimized ? null : openWindow(key))}
               />
             );
           }
