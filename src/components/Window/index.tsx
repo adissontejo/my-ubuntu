@@ -70,6 +70,7 @@ export const Window: FC<WindowProps> = ({
   return (
     <Rnd
       dragHandleClassName="header"
+      cancel=".action-button"
       minWidth={minWidth}
       minHeight={minHeight}
       maxWidth="100%"

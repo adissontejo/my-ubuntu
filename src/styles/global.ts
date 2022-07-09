@@ -9,6 +9,12 @@ export const GlobalStyles = createGlobalStyle`
     ${({ theme }) => theme.fonts.ubuntu}
   }
 
+  body {
+    background: no-repeat center url(./wallpaper.jpg);
+    background-color: linear-gradient(#c03621, #7d205d, #450a46, #1f0010);
+    background-size: cover;
+  }
+
   button {
     border: none;
     background: none;

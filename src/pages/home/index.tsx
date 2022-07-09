@@ -1,4 +1,12 @@
-import { Bash, Dock, DockProps, Header, Medals, Nautilus } from '~/components';
+import {
+  Bash,
+  Desktop,
+  Dock,
+  DockProps,
+  Header,
+  Medals,
+  Nautilus,
+} from '~/components';
 import { useWindows } from '~/hooks';
 import { WindowKey, WindowValue } from '~/types';
 
@@ -46,6 +54,7 @@ const Home = () => {
       <Header />
       <Dock items={dockItems} />
       <main ref={main}>
+        <Desktop items={dockItems} />
         {Object.entries(windows).map(
           ([key, value]: [WindowKey, WindowValue]) => {
             if (!value) {

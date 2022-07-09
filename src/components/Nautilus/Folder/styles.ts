@@ -17,7 +17,7 @@ export const Container = styled.button`
     margin: 3px 0 0;
     padding: 3px;
 
-    max-width: 100px;
+    max-width: 95px;
     border-radius: 3px;
 
     color: white;
@@ -26,6 +26,10 @@ export const Container = styled.button`
 
   &:hover {
     filter: brightness(1.1);
+
+    ${({ theme }) => theme.media.sm} {
+      filter: brightness(1);
+    }
   }
 
   &:focus {
@@ -35,6 +39,16 @@ export const Container = styled.button`
 
     > .name {
       background: ${({ theme }) => theme.colors.primary};
+    }
+
+    ${({ theme }) => theme.media.sm} {
+      > .icon {
+        filter: brightness(1);
+      }
+
+      > .name {
+        background: #0000;
+      }
     }
   }
 `;

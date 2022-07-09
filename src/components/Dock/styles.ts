@@ -13,4 +13,8 @@ export const Container = styled.aside`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+
+  ${({ theme }) => theme.media.sm} {
+    display: none;
+  }
 `;

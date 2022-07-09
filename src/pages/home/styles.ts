@@ -13,7 +13,6 @@ const init = keyframes`
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(#c03621, #7d205d, #450a46, #1f0010);
 
   overflow: hidden;
 
@@ -26,6 +25,13 @@ export const Container = styled.div`
 
   animation: ${init} 2s ease-in;
 
+  ${({ theme }) => theme.media.sm} {
+    grid:
+      'head' 25px
+      'main' 1fr
+      / 1fr;
+  }
+
   > main {
     position: relative;
     grid-area: main;
@@ -33,8 +39,5 @@ export const Container = styled.div`
     overflow: hidden;
 
     height: 100%;
-
-    background: no-repeat center url(./wallpaper.jpg);
-    background-size: cover;
   }
 `;

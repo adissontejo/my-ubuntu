@@ -16,8 +16,8 @@ export const useRnd = ({
 }: UseRndProps) => {
   const { main } = useWindows();
 
-  const [fullFilled, setFullFilled] = useState(false);
-  const [fullFillMode, setFullFillMode] = useState(false);
+  const [fullFilled, setFullFilled] = useState(true);
+  const [fullFillMode, setFullFillMode] = useState(true);
   const [minimizeMode, setMinimizeMode] = useState(false);
 
   const [dragPosition, setDragPosition] = useState({

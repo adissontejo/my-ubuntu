@@ -1,6 +1,15 @@
-import { useState } from 'react';
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { useGithub } from '~/hooks';
+
+import { BashLineProps } from './BashLine';
 
 const help = `List of available commands:
 
@@ -12,12 +21,20 @@ clear: clears bash.\nUsage: 'clear'.\n
 `;
 
 export const useCommands = () => {
+  const [entry, setEntry] = useState({
+    value: '',
+    cursor: 0,
+  });
   const [lines, setLines] = useState([0]);
   const [count, setCount] = useState(1);
+  const [inputFocus, setInputFocus] = useState(true);
+
+  const containerRef = useRef<HTMLDivElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
   const { repos } = useGithub();
 
-  const commands: Record<string, (args: string[]) => string | null> = {
+  const commands: BashLineProps['commands'] = {
     echo: args => args.join(' '),
     ls: () => repos.join(' '),
     cd: ([path]: string[]) => {
@@ -39,22 +56,80 @@ export const useCommands = () => {
       return null;
     },
     clear: () => {
-      setLines([]);
+      setLines([count]);
 
       return null;
     },
     help: () => help,
   };
 
-  const onSubmit = () => {
-    setLines(prev => [...prev, count]);
-    setCount(count + 1);
+  const onInputKeydown = ({ key }: KeyboardEvent<HTMLInputElement>) => {
+    switch (key) {
+      case 'ArrowLeft':
+        setEntry(prev => ({
+          ...prev,
+          cursor: Math.max(0, prev.cursor - 1),
+        }));
+        break;
+      case 'ArrowRight':
+        setEntry(prev => ({
+          ...prev,
+          cursor: Math.min(prev.value.length, prev.cursor + 1),
+        }));
+        break;
+      case 'Enter':
+        setEntry({
+          value: '',
+          cursor: 0,
+        });
+        setLines(prev => [...prev, count]);
+        setCount(prev => prev + 1);
+        break;
+    }
   };
 
-  const reset = () => {
-    setLines([0]);
-    setCount(1);
+  useEffect(() => {
+    setTimeout(() => {
+      inputRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }, 50);
+  }, [lines]);
+
+  useEffect(() => {
+    if (inputFocus) {
+      inputRef.current.focus();
+    }
+  }, [inputFocus]);
+
+  const onContainerMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    setInputFocus(true);
   };
 
-  return { lines, commands, onSubmit, reset };
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEntry({
+      value: e.target.value,
+      cursor: e.target.selectionStart,
+    });
+  };
+
+  const onInputBlur = () => {
+    setInputFocus(false);
+  };
+
+  return {
+    lines,
+    entry,
+    inputFocus,
+    setInputFocus,
+    containerRef,
+    inputRef,
+    commands,
+    onContainerMouseDown,
+    onInputKeydown,
+    onInputChange,
+    onInputBlur,
+  };
 };

@@ -9,7 +9,7 @@ export type FolderProps = {
 };
 
 export const Folder: FC<FolderProps> = ({ name, src, action }) => (
-  <Container onDoubleClick={action}>
+  <Container onDoubleClick={action} onTouchEnd={action}>
     <img
       src={src || '/nautilus/folder.svg'}
       alt={name}

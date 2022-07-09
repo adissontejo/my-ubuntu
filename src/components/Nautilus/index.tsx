@@ -65,8 +65,6 @@ export const Nautilus: FC<NautilusProps> = ({ ...rest }) => {
       title="Arquivos"
       defaultWidthPercent={70}
       defaultHeightPercent={85}
-      minWidth={600}
-      minHeight={400}
       navigateEnabled
       backEnabled={location.length > 0}
       forwardEnabled={forward.current.length > 0}

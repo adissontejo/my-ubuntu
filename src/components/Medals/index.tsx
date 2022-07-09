@@ -23,7 +23,7 @@ export const Medals: FC<WindowProps> = ({ ...rest }) => {
       navigateEnabled
       onBack={previous}
       onForward={next}
-      minWidth={500}
+      minWidth={300}
       minHeight={500}
       {...rest}
     >

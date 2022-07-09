@@ -232,7 +232,7 @@ export const Header = styled.header<HeaderProps>`
     padding: 3px;
     margin: 0 10px 0 0;
 
-    background: #0000;
+    background: #2c2c2c;
     border-radius: 100%;
     width: 20px;
     height: 20px;
@@ -240,7 +240,7 @@ export const Header = styled.header<HeaderProps>`
     display: flex;
     align-items: center;
 
-    transition: background 200ms;
+    transition: all 0.3s;
 
     > .icon {
       color: white;
@@ -249,11 +249,17 @@ export const Header = styled.header<HeaderProps>`
     }
 
     &:hover {
-      background: #fff3;
+      filter: brightness(1.4);
     }
 
     &.close {
       background: #df4a16;
+    }
+
+    &:not(.close) {
+      ${({ theme }) => theme.media.sm} {
+        visibility: hidden;
+      }
     }
   }
 `;

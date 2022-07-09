@@ -13,7 +13,7 @@ export const Container = styled.div`
     overflow: auto;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, 120px);
+    grid-template-columns: repeat(auto-fill, 100px);
     justify-content: space-evenly;
   }
 `;
