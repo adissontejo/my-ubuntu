@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 15px 0 0 15px;
+  padding: 15px 0 0 40px;
 
   width: 100%;
   height: 100%;
   overflow: auto;
+
+  display: flex;
 
   color: white;
 
@@ -17,37 +19,54 @@ export const Container = styled.div`
     overflow: hidden;
   }
 
-  > .header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  > .wrapper {
+    > .header {
+      margin: 0 10px 0 0;
 
-    > .icon {
-      width: 50px;
-      height: 50px;
-      object-fit: fit-content;
+      display: grid;
+      grid:
+        'icon title' auto
+        'icon subtitle' auto
+        / 60px auto;
+      gap: 10px 20px;
+
+      > .icon {
+        grid-area: icon;
+
+        width: 60px;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      > .title {
+        grid-area: title;
+
+        color: ${({ theme }) => theme.colors.text};
+      }
+
+      > .subtitle {
+        grid-area: subtitle;
+      }
     }
-  }
 
-  > .content {
-    margin: 10px 0 0 60px;
+    > .content {
+      margin: 10px 0 0;
+    }
   }
 `;
 
 export const Rank = styled.div`
-  margin: 20px 0 0;
+  margin: 30px 0 0;
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 
   > .icon {
+    padding: 8px;
+
     width: 60px;
     height: 60px;
     object-fit: contain;
-  }
-
-  > .alt {
-    text-align: center;
   }
 `;

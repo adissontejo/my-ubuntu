@@ -1,7 +1,8 @@
 export const theme = {
   colors: {
     primary: '#e75621',
-    background: '#3e3e3e',
+    background: '#282a36',
+    text: '#8be9fd',
   },
   fonts: {
     ubuntu: `font-family: 'Ubuntu', sans-serif;`,
